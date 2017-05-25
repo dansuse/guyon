@@ -22,6 +22,23 @@ class Post_model extends CI_Model {
         return NULL;
     }
 
+    public function edit_caption_post($id, $newCaption){
+        $salt = 'qJB0rGtIn5UB1xG03efyCp';
+        $newId = $this->Safe->decrypt($id, $salt);
+        $data = $this->db->where(array("id"=>$newId,"status"=>1))->get("post")->row();
+        if($data){
+            $this->db->where("id",$newId)->update("post",array("caption"=>$newCaption));
+            return [
+                'status' => TRUE,
+                'message' => 'Edit caption success'
+            ];
+        }
+        return [
+            'status' => FALSE,
+            'message' => 'Edit caption failed'
+        ];
+    }    
+
     public function get(){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
         $data = $this->db->where("status",1)->get("post")->result();
@@ -70,12 +87,103 @@ class Post_model extends CI_Model {
         return "fail";
     }
 
+    //_post tidak berarti menggunakan method post REST API
+    //post disini artinya postingan
+    public function report_post($id, $username, $cause){//id post
+        $salt = 'qJB0rGtIn5UB1xG03efyCp';
+        $newId = $this->Safe->decrypt($id, $salt);
+        $data = $this->db->where("id", $newId)->get("post")->row();
+        if($data){
+            $this->db->where("id", $newId)->update("post", array("status"=>"0"));
+            $arr = [
+                "idPost"=>$newId,
+                "username"=>$username,
+                "cause"=>$cause
+            ];
+            $this->db->insert("report",$arr);
+            return [
+                'status' => TRUE,
+                'message' => 'Report post success'
+            ];
+        }
+        return [
+                'status' => FALSE,
+                'message' => 'Report post failed. Post not found!'
+            ];
+    }
+
+    public function vote_reply($id, $username, $vote){
+        $salt = 'qJB0rGtIn5UB1xG03efyCp';
+        $newId = $this->Safe->decrypt($id, $salt);
+        $data = $this->db->where("id",$newId)->get("reply")->row();
+        if($data){
+            $data2 = $this->db->where(array("idreply"=>$newId,"username"=>$username))->get("reply_like")->row();
+            if(empty($data2)){
+                $this->db->where("id",$newId)->update("reply",array("like_count"=>$data->like_count+$vote));
+                $arr = [
+                    "idReply"=>$newId,
+                    "username"=>$username,
+                    "status"=>$vote
+                ];
+                $this->db->insert("reply_like",$arr);
+                return [
+                    'status' => TRUE,
+                    'message' => 'Vote reply success'
+                ];
+            }else if($data2->status != $vote){
+                $this->db->where("id",$newId)->update("reply",array("like_count"=>$data->like_count+$vote * 2));
+                $this->db->where("id",$data2->id)->update("reply_like",array("status"=>$vote));
+                return [
+                    'status' => TRUE,
+                    'message' => 'Vote reply success'
+                ];
+            }
+        }
+        return [
+            'status' => FALSE,
+            'message' => 'Invalid ID Reply'
+        ];;
+    }
+
+    public function vote_comment($id, $username, $vote){
+        $salt = 'qJB0rGtIn5UB1xG03efyCp';
+        $newId = $this->Safe->decrypt($id, $salt);
+        $data = $this->db->where("id",$newId)->get("comment")->row();
+        if($data){
+            $data2 = $this->db->where(array("idcomment"=>$newId,"username"=>$username))->get("comment_like")->row();
+            if(empty($data2)){
+                $this->db->where("id",$newId)->update("comment",array("like_count"=>$data->like_count+$vote));
+                $arr = [
+                    "idComment"=>$newId,
+                    "username"=>$username,
+                    "status"=>$vote
+                ];
+                $this->db->insert("comment_like",$arr);
+                return [
+                    'status' => TRUE,
+                    'message' => 'Vote comment success'
+                ];
+            }else if($data2->status != $vote){
+                $this->db->where("id",$newId)->update("comment",array("like_count"=>$data->like_count+$vote * 2));
+                $this->db->where("id",$data2->id)->update("comment_like",array("status"=>$vote));
+                return [
+                    'status' => TRUE,
+                    'message' => 'Vote comment success'
+                ];
+            }
+        }
+        return [
+            'status' => FALSE,
+            'message' => 'Invalid ID Comment'
+        ];;
+    }
+
     public function vote($id, $username, $vote){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
         $newId = $this->Safe->decrypt($id, $salt);
         $data = $this->db->where("id",$newId)->get("post")->row();
         if($data){
-            $data2 = $this->db->where(array("id"=>$newId,"username"=>$username))->get("like")->row();
+            $data2 = $this->db->where(array("idpost"=>$newId,"username"=>$username))->get("like")->row();
             if(empty($data2)){
                 $this->db->where("id",$newId)->update("post",array("like_count"=>$data->like_count+$vote));
                 $arr = [
@@ -90,7 +198,7 @@ class Post_model extends CI_Model {
                 ];
             }else if($data2->status != $vote){
                 $this->db->where("id",$newId)->update("post",array("like_count"=>$data->like_count+$vote * 2));
-                $this->db->where("id",$newId)->update("like",array("status"=>$vote));
+                $this->db->where("id",$data2->id)->update("like",array("status"=>$vote));
                 return [
                     'status' => TRUE,
                     'message' => 'Vote success'

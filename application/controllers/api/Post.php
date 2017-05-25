@@ -126,6 +126,22 @@ class Post extends REST_Controller {
         }
     }
 
+    public function edit_caption_put(){
+        $this->load->model("Post_model");
+        $id = $this->put("id");
+        $newCaption = $this->put("newCaption");
+        $data = $this->Post_model->edit_caption_post($id, $newCaption);
+        $this->response($data, REST_Controller::HTTP_OK);
+        if ($data["status"])
+        {
+            $this->response($data, REST_Controller::HTTP_OK);
+        }
+        else
+        {
+            $this->response($data, REST_Controller::HTTP_NOT_MODIFIED);
+        }
+    }
+
     public function most_get()
     {
         $this->load->model("Post_model");
@@ -182,6 +198,104 @@ class Post extends REST_Controller {
                 $this->response([
                     'status' => FALSE,
                     'message' => 'No post were found'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function report_post()//_post artinya menggunakan method post REST API
+    {
+        $id = $this->post("id");
+        $username = $this->post("username");
+        $cause = $this->post("cause");
+        $this->load->model("Post_model");
+        $data = $this->Post_model->report_post($id, $username,$cause);
+
+        if ($data["status"])
+        {
+            $this->response($data, REST_Controller::HTTP_OK);
+        }
+        else
+        {
+            $this->response($data, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function upvote_reply_post()
+    {
+        $id = $this->post("id");
+        $username = $this->post("username");
+        $this->load->model("Post_model");
+        $data = $this->Post_model->vote_reply($id, $username, 1);
+
+        if ($data)
+            {
+                $this->response($data, REST_Controller::HTTP_OK);
+            }
+            else
+            {
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'Failed'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function downvote_reply_post()
+    {
+        $id = $this->post("id");
+        $username = $this->post("username");
+        $this->load->model("Post_model");
+        $data = $this->Post_model->vote_reply($id, $username,-1);
+
+        if ($data)
+            {
+                $this->response($data, REST_Controller::HTTP_OK);
+            }
+            else
+            {
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'Failed'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function upvote_comment_post()
+    {
+        $id = $this->post("id");
+        $username = $this->post("username");
+        $this->load->model("Post_model");
+        $data = $this->Post_model->vote_comment($id, $username, 1);
+
+        if ($data)
+            {
+                $this->response($data, REST_Controller::HTTP_OK);
+            }
+            else
+            {
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'Failed'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function downvote_comment_post()
+    {
+        $id = $this->post("id");
+        $username = $this->post("username");
+        $this->load->model("Post_model");
+        $data = $this->Post_model->vote_comment($id, $username,-1);
+
+        if ($data)
+            {
+                $this->response($data, REST_Controller::HTTP_OK);
+            }
+            else
+            {
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'Failed'
             ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
