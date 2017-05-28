@@ -535,8 +535,11 @@ abstract class REST_Controller extends CI_Controller {
         // Skip keys test for $config['auth_override_class_method']['class'['method'] = 'none'
         if ($this->config->item('rest_enable_keys') && $this->auth_override !== TRUE)
         {
+
             $this->_allow = $this->_detect_api_key();
+
         }
+
 
         // Only allow ajax requests
         if ($this->input->is_ajax_request() === FALSE && $this->config->item('rest_ajax_only'))
@@ -553,11 +556,13 @@ abstract class REST_Controller extends CI_Controller {
             (! ($this->config->item('rest_enable_keys') && $this->_allow === TRUE) ||
             ($this->config->item('allow_auth_and_keys') === TRUE && $this->_allow === TRUE)))
         {
+
             $rest_auth = strtolower($this->config->item('rest_auth'));
             switch ($rest_auth)
             {
                 case 'basic':
                     $this->_prepare_basic_auth();
+                    
                     break;
                 case 'digest':
                     $this->_prepare_digest_auth();
@@ -647,8 +652,11 @@ abstract class REST_Controller extends CI_Controller {
         // Do we want to log this method (if allowed by config)?
         $log_method = ! (isset($this->methods[$controller_method]['log']) && $this->methods[$controller_method]['log'] === FALSE);
 
+        
         // Use keys for this method?
         $use_key = ! (isset($this->methods[$controller_method]['key']) && $this->methods[$controller_method]['key'] === FALSE);
+
+        // $this->response(["tes" => $this->methods[$controller_method]['key'] === FALSE]);
 
         // They provided a key, but it wasn't valid, so get them out of here
         if ($this->config->item('rest_enable_keys') && $use_key && $this->_allow === FALSE)
@@ -2021,6 +2029,7 @@ abstract class REST_Controller extends CI_Controller {
         // We need to test which server authentication variable to use,
         // because the PHP ISAPI module in IIS acts different from CGI
         $digest_string = $this->input->server('PHP_AUTH_DIGEST');
+        //$this->response(["tes" => $digest_string]);
         if ($digest_string === NULL)
         {
             $digest_string = $this->input->server('HTTP_AUTHORIZATION');

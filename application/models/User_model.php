@@ -35,4 +35,31 @@ class User_model extends CI_Model {
             }
         }
     }
+
+    public function getPassword($username){
+        $data = $this->db->where("username", $username)->get("user")->row();
+        if(empty($data)){
+            return false;
+        }else{
+            $hash = $data->hash;
+            $pass = $this->Safe->decrypt($data->password, $hash);
+            return $pass;
+        }
+    }
+
+    public function checkUsernameValid($username){
+        $data = $this->db->where("username", $username)->get("user")->row();
+        if(empty($data)){
+            return false;
+        }else{
+            $api_key = $this->db->where("username", $username)->get("keys")->row();
+            if(empty($api_key)){
+                return "make new key";
+            }else{
+                return $api_key->key;
+            }
+            
+        }
+    }
+
 }

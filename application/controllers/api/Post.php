@@ -422,4 +422,83 @@ class Post extends REST_Controller {
         $this->set_response($message, REST_Controller::HTTP_NO_CONTENT); // NO_CONTENT (204) being the HTTP response code
     }
 
+    public function memegen_templates_get(){
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => 'https://memegen.link/api/templates/'
+        ));
+        $hasil = curl_exec($curl);
+        $this->set_response(json_decode($hasil), REST_Controller::HTTP_OK);
+    }
+
+    public function memegen_fonts_get(){
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => 'https://memegen.link/api/fonts/'
+        ));
+        $hasil = curl_exec($curl);
+        $this->set_response(json_decode($hasil), REST_Controller::HTTP_OK);
+    }
+
+    public function memegen_create_meme_get(){
+        $gambar = $this->get("gambar");
+        $text1 = $this->get("text1");
+        $text2 = $this->get("text2");
+        $font = $this->get("font");
+        $width = $this->get("width");
+        $height = $this->get("height");
+        
+        $ctr = 0;
+
+        $url_final = "https://memegen.link/";
+        if(is_null($gambar) || empty($gambar) || $gambar == ""){
+            $this->set_response("Parameter gambar wajib", REST_Controller::HTTP_BAD_REQUEST);
+        }else{
+            $url_final .= $gambar;
+        }
+
+        if(is_null($text1) || empty($text1) || $text1 == ""){
+            $this->set_response("Parameter text1 wajib", REST_Controller::HTTP_BAD_REQUEST);
+        }else{
+            $url_final .= "/" . $text1;
+        }
+
+        if(is_null($text2) || empty($text2) || $text2 == ""){
+            $this->set_response("Parameter text2 wajib", REST_Controller::HTTP_BAD_REQUEST);
+        }else{
+            $url_final .= "/" . $text2 . ".jpg";
+        }
+
+        if(!(is_null($font) || empty($font) || $font == "")){
+            if($ctr == 0){
+                $url_final .= "?" . "font=" . $font;    
+            }else{
+                $url_final .= "&" . "font=" . $font;    
+            }
+            $ctr++;
+        }
+
+        if(!(is_null($width) || empty($width) || $width == "")){
+            if($ctr == 0){
+                $url_final .= "?" . "width=" . $width;    
+            }else{
+                $url_final .= "&" . "width=" . $width;    
+            }
+            $ctr++;
+        }
+
+        if(!(is_null($height) || empty($height) || $height == "")){
+            if($ctr == 0){
+                $url_final .= "?" . "height=" . $height;    
+            }else{
+                $url_final .= "&" . "height=" . $height;    
+            }
+            $ctr++;
+        }
+
+        $this->set_response($url_final, REST_Controller::HTTP_OK);
+    }
+
 }

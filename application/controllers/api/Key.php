@@ -24,7 +24,7 @@ class Key extends REST_Controller {
             'index_delete' => ['level' => 10],
             'level_post' => ['level' => 10],
             'regenerate_post' => ['level' => 10],
-            'new_get' => ['level' => 10]
+            'new_get' => ['level' => 10, "key" => FALSE]
         ];
 
     /**
@@ -35,10 +35,38 @@ class Key extends REST_Controller {
      */
 
     public function new_get(){
+        $username = $this->get('username');
+        $this->load->model("User_model", "User");
+
+        if(is_null($username) || empty($username)){
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Include username in your request'
+            ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // 
+        }else if($username == ""){
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Username is empty quoted string'
+            ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // 
+        }
+        $valid = $this->User->checkUsernameValid($username);
+        if($valid == false){
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Username is not valid'
+            ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // 
+        }else if($valid != "make new key"){
+            $this->response([
+                'status' => FALSE,
+                'message' => 'You have already request for api key',
+                'api_key' => $valid
+            ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // 
+        }
+
         $key = $this->_generate_key();
         $level = $this->put('level') ? $this->put('level') : 1;
         $ignore_limits = ctype_digit($this->put('ignore_limits')) ? (int) $this->put('ignore_limits') : 1;
-        if ($this->_insert_key($key, ['level' => $level, 'ignore_limits' => $ignore_limits]))
+        if ($this->_insert_key($key, ['level' => $level, 'ignore_limits' => $ignore_limits, 'username' => $username]))
         {
             $this->response([
                 'status' => TRUE,
