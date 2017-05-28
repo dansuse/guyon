@@ -363,6 +363,7 @@ class Post extends REST_Controller {
 
     public function reply_post()
     {
+        //id = id comment
         $id = $this->post("id");
         $comment = $this->post("comment");
         $username = $this->post("username");

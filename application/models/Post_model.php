@@ -233,7 +233,7 @@ class Post_model extends CI_Model {
             'message' => 'Invalid ID'
         ];
     }
-
+    //$id -> id comment 
     public function reply($id, $comment, $username){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
         $newId = $this->Safe->decrypt($id, $salt);
@@ -246,7 +246,7 @@ class Post_model extends CI_Model {
                 "username"=>$username,
                 "comment"=>$comment,
             ];
-            $this->db->insert("reply",$message);
+            $this->db->insert("comment",$message);
             return [
                 'status' => TRUE,
                 'message' => 'Comment success'
