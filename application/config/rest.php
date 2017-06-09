@@ -110,7 +110,7 @@ $config['rest_realm'] = 'REST API';
 |           authorization key
 |
 */
-$config['rest_auth'] = 'digest';
+$config['rest_auth'] = 'oauth2';
 
 /*
 |--------------------------------------------------------------------------
@@ -155,7 +155,7 @@ $config['allow_auth_and_keys'] = TRUE;
 | e.g: md5('admin:REST API:1234') = '1e957ebc35631ab22d5bd6526bd14ea2'
 |
 */
-$config['auth_library_class'] = 'DigestLibrary';
+$config['auth_library_class'] = 'BasicAuthLibrary';
 $config['auth_library_function'] = 'auth';
 
 /*
@@ -198,8 +198,10 @@ $config['auth_library_function'] = 'auth';
 |            $config['auth_override_class_method_http']['deals']['insert']['post'] = 'none';
 |            $config['auth_override_class_method_http']['deals']['*']['options'] = 'none';
 */
-
+$config['auth_override_class_method_http']['oauth2']['authorize']['post'] = 'basic';
+$config['auth_override_class_method_http']['oauth2']['token']['post'] = 'none';
 // ---Uncomment list line for the wildard unit test
+
 // $config['auth_override_class_method_http']['wildcard_test_cases']['*']['options'] = 'basic';
 
 /*
@@ -323,7 +325,7 @@ $config['rest_keys_table'] = 'keys';
 |   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 |
 */
-$config['rest_enable_keys'] = TRUE;
+$config['rest_enable_keys'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

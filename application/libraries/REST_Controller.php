@@ -550,7 +550,7 @@ abstract class REST_Controller extends CI_Controller {
                     $this->config->item('rest_message_field_name') => $this->lang->line('text_rest_ajax_only')
                 ], self::HTTP_NOT_ACCEPTABLE);
         }
-
+        //$this->response($this->auth_override);
         // When there is no specific override for the current class/method, use the default auth value set in the config
         if ($this->auth_override === FALSE &&
             (! ($this->config->item('rest_enable_keys') && $this->_allow === TRUE) ||
@@ -562,10 +562,12 @@ abstract class REST_Controller extends CI_Controller {
             {
                 case 'basic':
                     $this->_prepare_basic_auth();
-                    
                     break;
                 case 'digest':
                     $this->_prepare_digest_auth();
+                    break;
+                case 'oauth2':
+                    $this->_prepare_oauth2_auth();
                     break;
                 case 'session':
                     $this->_check_php_session();
@@ -1264,7 +1266,6 @@ abstract class REST_Controller extends CI_Controller {
     {
         // Assign the class/method auth type override array from the config
         $auth_override_class_method = $this->config->item('auth_override_class_method');
-
         // Check to see if the override array is even populated
         if ( ! empty($auth_override_class_method))
         {
@@ -2068,6 +2069,70 @@ abstract class REST_Controller extends CI_Controller {
                     $this->config->item('rest_message_field_name') => $this->lang->line('text_rest_invalid_credentials')
                 ], self::HTTP_UNAUTHORIZED);
         }
+    }
+
+    /**
+     * Prepares for oauth2 authentication
+     *
+     * @access protected
+     * @return void
+     */
+    protected function _prepare_oauth2_auth()
+    {
+        // If whitelist is enabled it has the first chance to kick them out
+        if ($this->config->item('rest_ip_whitelist_enabled'))
+        {
+            $this->_check_whitelist_auth();
+        }
+
+        // if($_POST['access_token'] || $_GET['access_token']){
+        //     $this->response("you are sip");
+        // }
+
+        $this->oauth2->resource();
+
+        // // We need to test which server authentication variable to use,
+        // // because the PHP ISAPI module in IIS acts different from CGI
+        // $digest_string = $this->input->server('PHP_AUTH_DIGEST');
+        // //$this->response(["tes" => $digest_string]);
+        // if ($digest_string === NULL)
+        // {
+        //     $digest_string = $this->input->server('HTTP_AUTHORIZATION');
+        // }
+
+        // $unique_id = uniqid();
+
+        // // The $_SESSION['error_prompted'] variable is used to ask the password
+        // // again if none given or if the user enters wrong auth information
+        // if (empty($digest_string))
+        // {
+        //     $this->_force_login($unique_id);
+        // }
+
+        // // We need to retrieve authentication data from the $digest_string variable
+        // $matches = [];
+        // preg_match_all('@(username|nonce|uri|nc|cnonce|qop|response)=[\'"]?([^\'",]+)@', $digest_string, $matches);
+        // $digest = (empty($matches[1]) || empty($matches[2])) ? [] : array_combine($matches[1], $matches[2]);
+
+        // // For digest authentication the library function should return already stored md5(username:restrealm:password) for that username see rest.php::auth_library_function config
+        // $username = $this->_check_login($digest['username'], TRUE);
+        // if (array_key_exists('username', $digest) === FALSE || $username === FALSE)
+        // {
+        //     $this->_force_login($unique_id);
+        // }
+
+        // $md5 = md5(strtoupper($this->request->method).':'.$digest['uri']);
+        // $valid_response = md5($username.':'.$digest['nonce'].':'.$digest['nc'].':'.$digest['cnonce'].':'.$digest['qop'].':'.$md5);
+
+        // // Check if the string don't compare (case-insensitive)
+        // if (strcasecmp($digest['response'], $valid_response) !== 0)
+        // {
+        //     // Display an error response
+        //     $this->response([
+        //             $this->config->item('rest_status_field_name') => FALSE,
+        //             $this->config->item('rest_message_field_name') => $this->lang->line('text_rest_invalid_credentials')
+        //         ], self::HTTP_UNAUTHORIZED);
+        // }
     }
 
     /**
