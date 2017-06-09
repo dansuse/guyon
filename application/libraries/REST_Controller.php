@@ -1158,9 +1158,10 @@ abstract class REST_Controller extends CI_Controller {
     protected function _check_limit($controller_method)
     {
         // They are special, or it might not even have a limit
+        
         if (empty($this->rest->ignore_limits) === FALSE)
         {
-            // Everything is fine
+            // Everything is fin
             return TRUE;
         }
 
