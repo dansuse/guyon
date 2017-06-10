@@ -23,7 +23,7 @@ class Post extends REST_Controller {
     {
         // Construct the parent class
         parent::__construct();
-
+        $this->load->model("Post_model");
         // Configure limits on our controller methods
         // Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
         $this->methods['users_get']['limit'] = 500; // 500 requests per hour per user/key
@@ -35,61 +35,95 @@ class Post extends REST_Controller {
 
     public function all_get()
     {
-        $this->load->model("Post_model");
-        $users = $this->Post_model->get();
+        $data['start'] = $this->get("start");
+        $data['end'] = $this->get("end");
 
-        $id = $this->get('id');
-
-        // If the id parameter doesn't exist return all the users
-
-        if ($id === NULL)
+        
+        $res = $this->Post_model->get($data);
+        if (!empty($res))
         {
-            // Check if the users data store contains users (in case the database result returns NULL)
-            if ($users)
-            {
-                // Set the response and exit
-                $this->response($users, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
-            }
-            else
-            {
-                // Set the response and exit
-                $this->response([
-                    'status' => FALSE,
-                    'message' => 'No users were found'
-                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
-            }
+            $this->set_response($res, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
         }
-
-        // Find and return a single record for a particular user.
-
-        $id = (int) $id;
-
-        // Validate the id.
-        if ($id <= 0)
+        else
         {
-            // Invalid id, set the response and exit.
-            $this->response(NULL, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
+            $this->set_response([
+                'status' => FALSE,
+                'message' => 'User could not be found'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
         }
+    }
 
-        // Get the user from the array, using the id as key for retrieval.
-        // Usually a model is to be used for this.
+    public function trending_get()
+    {
+        $data['start'] = $this->get("start");
+        $data['end'] = $this->get("end");
 
-        $user = NULL;
-
-        if (!empty($users))
+        
+        $res = $this->Post_model->get_trending($data);
+        if (!empty($res))
         {
-            foreach ($users as $key => $value)
-            {
-                if (isset($value['id']) && $value['id'] === $id)
-                {
-                    $user = $value;
-                }
-            }
+            $this->set_response($res, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
         }
-
-        if (!empty($user))
+        else
         {
-            $this->set_response($user, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+            $this->set_response([
+                'status' => FALSE,
+                'message' => 'User could not be found'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+    }
+
+    public function hot_get()
+    {
+        $data['start'] = $this->get("start");
+        $data['end'] = $this->get("end");
+
+        
+        $res = $this->Post_model->get_hot($data);
+        if (!empty($res))
+        {
+            $this->set_response($res, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+        }
+        else
+        {
+            $this->set_response([
+                'status' => FALSE,
+                'message' => 'User could not be found'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+    }
+
+    public function fresh_get()
+    {
+        $data['start'] = $this->get("start");
+        $data['end'] = $this->get("end");
+
+        
+        $res = $this->Post_model->get_fresh($data);
+        if (!empty($res))
+        {
+            $this->set_response($res, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+        }
+        else
+        {
+            $this->set_response([
+                'status' => FALSE,
+                'message' => 'User could not be found'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+    }
+
+    public function explore_get()
+    {
+        $data['kategori'] = $this->get("kategori");
+        $data['start'] = $this->get("start");
+        $data['end'] = $this->get("end");
+
+        
+        $res = $this->Post_model->get_by_kategori($data);
+        if (!empty($res))
+        {
+            $this->set_response($res, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
         }
         else
         {
@@ -104,7 +138,7 @@ class Post extends REST_Controller {
     {
         $id = $this->get("id");
 
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->get_post($id);
 
         if ($id !== NULL)
@@ -129,7 +163,7 @@ class Post extends REST_Controller {
     }
 
     public function edit_caption_put(){
-        $this->load->model("Post_model");
+        
         $id = $this->put("id");
         $newCaption = $this->put("newCaption");
         $data = $this->Post_model->edit_caption_post($id, $newCaption);
@@ -146,7 +180,7 @@ class Post extends REST_Controller {
 
     public function most_get()
     {
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->most_post();
 
         if ($data)
@@ -165,7 +199,7 @@ class Post extends REST_Controller {
     public function user_get()
     {
         $id = $this->get("id");
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->get_from_user($id);
         if($id === NULL){
             $this->response([
@@ -188,7 +222,7 @@ class Post extends REST_Controller {
 
     public function random_get()
     {
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->random();
 
         if ($data)
@@ -209,7 +243,7 @@ class Post extends REST_Controller {
         $id = $this->post("id");
         $username = $this->post("username");
         $cause = $this->post("cause");
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->report_post($id, $username,$cause);
 
         if ($data["status"])
@@ -226,7 +260,7 @@ class Post extends REST_Controller {
     {
         $id = $this->post("id");
         $username = $this->post("username");
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->vote_reply($id, $username, 1);
 
         if ($data)
@@ -246,7 +280,7 @@ class Post extends REST_Controller {
     {
         $id = $this->post("id");
         $username = $this->post("username");
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->vote_reply($id, $username,-1);
 
         if ($data)
@@ -266,7 +300,7 @@ class Post extends REST_Controller {
     {
         $id = $this->post("id");
         $username = $this->post("username");
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->vote_comment($id, $username, 1);
 
         if ($data)
@@ -286,7 +320,7 @@ class Post extends REST_Controller {
     {
         $id = $this->post("id");
         $username = $this->post("username");
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->vote_comment($id, $username,-1);
 
         if ($data)
@@ -306,7 +340,7 @@ class Post extends REST_Controller {
     {
         $id = $this->post("id");
         $username = $this->post("username");
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->vote($id, $username, 1);
 
         if ($data)
@@ -326,7 +360,7 @@ class Post extends REST_Controller {
     {
         $id = $this->post("id");
         $username = $this->post("username");
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->vote($id, $username,-1);
 
         if ($data)
@@ -347,7 +381,7 @@ class Post extends REST_Controller {
         $id = $this->post("id");
         $comment = $this->post("comment");
         $username = $this->post("username");
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->comment($id, $comment, $username);
 
         if ($data)
@@ -369,7 +403,7 @@ class Post extends REST_Controller {
         $id = $this->post("id");
         $comment = $this->post("comment");
         $username = $this->post("username");
-        $this->load->model("Post_model");
+        
         $data = $this->Post_model->reply($id, $comment, $username);
 
         if ($data)
@@ -399,8 +433,8 @@ class Post extends REST_Controller {
         if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
             $dataDB['status'] = 'success';       
             $dataDB['filename'] = $file_name;
-            $this->load->model("Post_model","Post");
-            $this->Post->upload($data);
+            
+            $this->Post_model->upload($data);
             $this->response($dataDB, REST_Controller::HTTP_OK);
          } else {
             $dataDB['status'] =  'failure';  
@@ -420,7 +454,7 @@ class Post extends REST_Controller {
 
         $this->load->model("Post_model", "Post");
         $message = [
-            "status" => $this->Post->delete($id, $postid)
+            "status" => $this->Post_model->delete($id, $postid)
         ];
         $this->set_response($message, REST_Controller::HTTP_NO_CONTENT); // NO_CONTENT (204) being the HTTP response code
     }

@@ -39,9 +39,50 @@ class Post_model extends CI_Model {
         ];
     }    
 
-    public function get(){
+    public function get($data){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
-        $data = $this->db->where("status",1)->get("post")->result();
+        $data = $this->db->where("status",1)->get("post", $data['end'] - $data['start'], $data['start'])->result();
+        foreach ($data as $d) {
+            $d->id = $this->Safe->encrypt($d->id, $salt);
+            $d->namafile = base_url() . "uploads/post/" . $d->namafile;
+        }
+        return $data;
+    }
+
+    public function get_trending($data){
+        $salt = 'qJB0rGtIn5UB1xG03efyCp';
+        $data = $this->db->where("status",1)->order_by("like_count","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
+        foreach ($data as $d) {
+            $d->id = $this->Safe->encrypt($d->id, $salt);
+            $d->namafile = base_url() . "uploads/post/" . $d->namafile;
+        }
+        return $data;
+    }
+
+    public function get_hot($data){
+        $salt = 'qJB0rGtIn5UB1xG03efyCp';
+        $data = $this->db->where("status",1)->order_by("hit_count","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
+        foreach ($data as $d) {
+            $d->id = $this->Safe->encrypt($d->id, $salt);
+            $d->namafile = base_url() . "uploads/post/" . $d->namafile;
+        }
+        return $data;
+    }
+
+    public function get_fresh($data){
+        $salt = 'qJB0rGtIn5UB1xG03efyCp';
+        $data = $this->db->where("status",1)->order_by("created","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
+        foreach ($data as $d) {
+            $d->id = $this->Safe->encrypt($d->id, $salt);
+            $d->namafile = base_url() . "uploads/post/" . $d->namafile;
+        }
+        return $data;
+    }
+
+    public function get_by_kategori($data){
+        $salt = 'qJB0rGtIn5UB1xG03efyCp';
+        $arr = ["status"=>"1","idkategori"=>$data['kategori']];
+        $data = $this->db->where($arr)->get("post",$data['end'] - $data['start'], $data['start'])->result();
         foreach ($data as $d) {
             $d->id = $this->Safe->encrypt($d->id, $salt);
             $d->namafile = base_url() . "uploads/post/" . $d->namafile;
