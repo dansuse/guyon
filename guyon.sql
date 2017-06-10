@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2017 at 07:37 PM
+-- Generation Time: Jun 10, 2017 at 08:23 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `guyon1`
+-- Database: `guyon`
 --
 
 -- --------------------------------------------------------
@@ -280,7 +280,15 @@ INSERT INTO `logs` (`id`, `uri`, `method`, `params`, `api_key`, `ip_address`, `t
 (88, 'api/post/downvote', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"6163cdd1-2a2d-4559-91f8-9648457fa2b2\";s:9:\"X-API-KEY\";s:40:\"4gs84sos0cgswcows40ow4o80c0swwws8gsow4s0\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"67\";s:10:\"Connection\";s:10:\"keep-alive\";s:8:\"username\";s:8:\"hendynew\";s:2:\"id\";s:44:\"czFBhfnLXNxD58iCT2pCzq1I0huxkow0EWaEegmP4E0=\";}', '4gs84sos0cgswcows40ow4o80c0swwws8gsow4s0', '::1', 1497066726, 1.21338, '1', 0),
 (89, 'api/post/downvote', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"b5998773-0cdd-4a1d-a0f5-416d1c003ade\";s:9:\"X-API-KEY\";s:40:\"4gs84sos0cgswcows40ow4o80c0swwws8gsow4s0\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"67\";s:10:\"Connection\";s:10:\"keep-alive\";s:8:\"username\";s:8:\"hendynew\";s:2:\"id\";s:44:\"czFBhfnLXNxD58iCT2pCzq1I0huxkow0EWaEegmP4E0=\";}', '4gs84sos0cgswcows40ow4o80c0swwws8gsow4s0', '::1', 1497066748, 1.11937, '1', 0),
 (90, 'api/post/downvote', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"63bf1c85-64d3-4cb2-acb4-7eede21d3338\";s:9:\"X-API-KEY\";s:40:\"4gs84sos0cgswcows40ow4o80c0swwws8gsow4s0\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"67\";s:10:\"Connection\";s:10:\"keep-alive\";s:8:\"username\";s:8:\"hendynew\";s:2:\"id\";s:44:\"czFBhfnLXNxD58iCT2pCzq1I0huxkow0EWaEegmP4E0=\";}', '4gs84sos0cgswcows40ow4o80c0swwws8gsow4s0', '::1', 1497066846, 1.12348, '1', 0),
-(91, 'api/post/downvote', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"aeecfeef-7466-48e5-abd5-be07e4afa2f9\";s:9:\"X-API-KEY\";s:40:\"4gs84sos0cgswcows40ow4o80c0swwws8gsow4s0\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"67\";s:10:\"Connection\";s:10:\"keep-alive\";s:8:\"username\";s:8:\"hendynew\";s:2:\"id\";s:44:\"czFBhfnLXNxD58iCT2pCzq1I0huxkow0EWaEegmP4E0=\";}', '4gs84sos0cgswcows40ow4o80c0swwws8gsow4s0', '::1', 1497067010, 1.18254, '1', 200);
+(91, 'api/post/downvote', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"aeecfeef-7466-48e5-abd5-be07e4afa2f9\";s:9:\"X-API-KEY\";s:40:\"4gs84sos0cgswcows40ow4o80c0swwws8gsow4s0\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"67\";s:10:\"Connection\";s:10:\"keep-alive\";s:8:\"username\";s:8:\"hendynew\";s:2:\"id\";s:44:\"czFBhfnLXNxD58iCT2pCzq1I0huxkow0EWaEegmP4E0=\";}', '4gs84sos0cgswcows40ow4o80c0swwws8gsow4s0', '::1', 1497067010, 1.18254, '1', 200),
+(92, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"ca2e827c-f1b6-4825-aa60-7acc85adfd60\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497099695, 0.204194, '1', 0),
+(93, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"e088b94a-1ed1-4ac0-b3ca-dd4f6fe070ff\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497099715, 0.112116, '1', 0),
+(94, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"2bcf5100-a135-423e-947a-f53f540715dd\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497100767, 0.118083, '1', 0),
+(95, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"cc23a0b4-a785-479e-8859-69bc1a44d544\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497100779, 0.0937459, '1', 0),
+(96, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"66022073-eefd-49c8-a97a-93f71540c34e\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497100923, 0.283741, '1', 0),
+(97, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"0523977a-1d0a-4802-b918-3aec0c96632c\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497101008, 0.165229, '1', 0),
+(98, 'api/oauth2/token', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"b294ae6a-fe95-456c-a94d-e81002da67b4\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:82:\"Basic YXNkYXNkUUt6NkZJdVVvUTQ3UTVKR3VCR2YyMDpybllqaFlYeU9Ra1BkaGVvZzNERzUxVkRRazZa\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"75\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"grant_type\";s:18:\"authorization_code\";s:4:\"code\";s:40:\"91569d1556c3e9ad7a32042f2733ec6f626e1d80\";}', '', '::1', 1497101014, 0.109822, '1', 0),
+(99, 'api/oauth2/token', 'post', 'a:13:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"438149ab-dfe8-4788-8071-7767c3dab779\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:82:\"Basic YXNkYXNkUUt6NkZJdVVvUTQ3UTVKR3VCR2YyMDpybllqaFlYeU9Ra1BkaGVvZzNERzUxVkRRazZa\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"92\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"grant_type\";s:18:\"authorization_code\";s:4:\"code\";s:40:\"91569d1556c3e9ad7a32042f2733ec6f626e1d80\";s:12:\"redirect_uri\";s:3:\"qew\";}', '', '::1', 1497101024, 0.444028, '1', 0);
 
 -- --------------------------------------------------------
 
@@ -296,6 +304,13 @@ CREATE TABLE `oauth_access_tokens` (
   `scope` varchar(2000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `oauth_access_tokens`
+--
+
+INSERT INTO `oauth_access_tokens` (`access_token`, `client_id`, `user_id`, `expires`, `scope`) VALUES
+('2744ec5017cdf8525b3d4103ae7518407dd014e2', 'asdasdQKz6FIuUoQ47Q5JGuBGf20', 'hendynew', '2017-06-10 14:23:44', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -310,6 +325,13 @@ CREATE TABLE `oauth_authorization_codes` (
   `expires` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `scope` varchar(2000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `oauth_authorization_codes`
+--
+
+INSERT INTO `oauth_authorization_codes` (`authorization_code`, `client_id`, `user_id`, `redirect_uri`, `expires`, `scope`) VALUES
+('41d82e1a5ca9ab08108364ac9df4391fa8ae5ea5', 'asdasdQKz6FIuUoQ47Q5JGuBGf20', 'hendynew', 'qew', '2017-06-10 13:22:33', NULL);
 
 -- --------------------------------------------------------
 
@@ -328,6 +350,14 @@ CREATE TABLE `oauth_clients` (
   `deskripsi_aplikasi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `oauth_clients`
+--
+
+INSERT INTO `oauth_clients` (`client_id`, `client_secret`, `redirect_uri`, `grant_types`, `scope`, `user_id`, `nama_aplikasi`, `deskripsi_aplikasi`) VALUES
+('asdasdQKz6FIuUoQ47Q5JGuBGf20', 'rnYjhYXyOQkPdheog3DG51VDQk6Z', 'qew', NULL, NULL, 'hendynew', 'asdasd', 'qwe'),
+('myappTUHdtJ3wXiRJQ6a0ErvNJh6773PlNLE+QIkVsUNBlOCDNAUShVJdYVwuSwnYsc0t94uR5nTbJQ=', 'auL0FaPAiRxX87OIN77gXmsgm+mKGwFfxry6Mh+zVBoks7hv9pwO1mdHaPwG8NGv8zuJvDUf9vzyOdyE', 'http://stts.edu', NULL, NULL, 'hendynew', 'myapp', 'aplikasi bagus');
+
 -- --------------------------------------------------------
 
 --
@@ -340,6 +370,24 @@ CREATE TABLE `oauth_refresh_tokens` (
   `user_id` varchar(255) DEFAULT NULL,
   `expires` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `scope` varchar(2000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `oauth_refresh_tokens`
+--
+
+INSERT INTO `oauth_refresh_tokens` (`refresh_token`, `client_id`, `user_id`, `expires`, `scope`) VALUES
+('081aa4986dc14a5d15e74c2b59bb6adc85e4e61f', 'asdasdQKz6FIuUoQ47Q5JGuBGf20', 'hendynew', '2017-06-24 13:23:44', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oauth_scopes`
+--
+
+CREATE TABLE `oauth_scopes` (
+  `scope` text,
+  `is_default` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -563,7 +611,7 @@ ALTER TABLE `limits`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 --
 -- AUTO_INCREMENT for table `post`
 --

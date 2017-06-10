@@ -60,14 +60,68 @@ class MyController extends CI_Controller {
         
     }
 
+    function gen_oauth_creds() {
+        // Get a whole bunch of random characters from the OS
+        $fp = fopen('/dev/urandom','rb');
+        $entropy = fread($fp, 32);
+        fclose($fp);
+
+        // Takes our binary entropy, and concatenates a string which represents the current time to the microsecond
+        $entropy .= uniqid(mt_rand(), true);
+
+        // Hash the binary entropy
+        $hash = hash('sha512', $entropy);
+
+        // Base62 Encode the hash, resulting in an 86 or 85 character string
+        $hash = gmp_strval(gmp_init($hash, 16), 62);
+
+        // Chop and send the first 80 characters back to the client
+        return array(
+            'consumer_key' => substr($hash, 0, 32),
+            'shared_secret' => substr($hash, 32, 48)
+        );
+    }
+
+    function crypto_rand_secure($min, $max)
+    {
+        $range = $max - $min;
+        if ($range < 1) return $min; // not so random...
+        $log = ceil(log($range, 2));
+        $bytes = (int) ($log / 8) + 1; // length in bytes
+        $bits = (int) $log + 1; // length in bits
+        $filter = (int) (1 << $bits) - 1; // set all lower bits to 1
+        do {
+            $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes)));
+            $rnd = $rnd & $filter; // discard irrelevant bits
+        } while ($rnd > $range);
+        return $min + $rnd;
+    }
+
+    function getToken($length)
+    {
+        $token = "";
+        $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $codeAlphabet.= "abcdefghijklmnopqrstuvwxyz";
+        $codeAlphabet.= "0123456789";
+        $max = strlen($codeAlphabet); // edited
+
+        for ($i=0; $i < $length; $i++) {
+            $token .= $codeAlphabet[$this->crypto_rand_secure(0, $max-1)];
+        }
+
+        return $token;
+    }
+
     public function handle_daftaraplikasi(){
         $rand_length = strlen($this->input->post('nama_aplikasi'));
-        $rand_length = 60 - $rand_length;
+        $rand_length = 28 - $rand_length;
         //echo $rand_length;
-        $new['client_id'] = $this->input->post('nama_aplikasi') . base64_encode(mcrypt_create_iv($rand_length, MCRYPT_DEV_URANDOM));
+        //$new['client_id'] = $this->input->post('nama_aplikasi') . base64_encode(mcrypt_create_iv($rand_length, MCRYPT_DEV_URANDOM));
+        $new['client_id'] = $this->input->post('nama_aplikasi') . $this->getToken($rand_length);
         // echo $new['client_id'];
         // echo "<br>";
-        $new['client_secret'] = base64_encode(mcrypt_create_iv(60, MCRYPT_DEV_URANDOM));
+        //$new['client_secret'] = base64_encode(mcrypt_create_iv(60, MCRYPT_DEV_URANDOM));
+        $new['client_secret'] = $this->getToken(28);
         // echo $new['client_secret'];
         $new['redirect_uri'] = $this->input->post('redirect_url');
         $new['user_id'] = $this->session->userdata(SESSION_LOGIN_NOW)['username'];
