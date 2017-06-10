@@ -198,9 +198,11 @@ class Post extends REST_Controller {
 
     public function user_get()
     {
-        $id = $this->get("id");
+        $data['id'] = $this->get("id");
+        $data['start'] = $this->get("start");
+        $data['end'] = $this->get("end");
         
-        $data = $this->Post_model->get_from_user($id);
+        $data = $this->Post_model->get_from_user($data);
         if($id === NULL){
             $this->response([
                     'status' => FALSE,

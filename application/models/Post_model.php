@@ -71,7 +71,7 @@ class Post_model extends CI_Model {
 
     public function get_fresh($data){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
-        $data = $this->db->where("status",1)->order_by("created","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
+        $data = $this->db->where("status",1)->order_by("updated","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
         foreach ($data as $d) {
             $d->id = $this->Safe->encrypt($d->id, $salt);
             $d->namafile = base_url() . "uploads/post/" . $d->namafile;
@@ -97,9 +97,9 @@ class Post_model extends CI_Model {
         return $data;
     }
 
-    public function get_from_user($user){
+    public function get_from_user($data){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
-        $data = $this->db->where("username",$user)->get("post")->result();
+        $data = $this->db->where("username",$data['id'])->get("post",$data['end'] - $data['start'], $data['start'])->result();
         foreach ($data as $d) {
             $d->id = $this->Safe->encrypt($d->id, $salt);
         }
