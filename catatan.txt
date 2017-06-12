@@ -1,0 +1,5 @@
+untuk post yang di block akan memiliki status "0"
+post normal memiliki status "1"
+untuk report yang belum dibaca akan memiliki status 0
+report yang disetujui memiliki status 1
+report yang ditolak memiliki status -1
