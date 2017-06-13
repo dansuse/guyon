@@ -24,13 +24,70 @@ class Post extends REST_Controller {
         // Construct the parent class
         parent::__construct();
         $this->load->model("Post_model");
+        $this->load->model("Key_model");
+
+        $limits = $this->Key_model->checkLimit($this->_apiuser->key);
+        if($limits == false){
+            $this->methods = [
+                'all_get' => ['level' => 1, 'limit' => 0],
+                'trending_get' => ['level' => 1, "limit" => 0],
+                'hot_get' => ['level' => 1, "limit" => 0],
+                'fresh_get' => ['level' => 1, "limit" => 0],
+                'explore_get' => ['level' => 1, "limit" => 0],
+                'get_get' => ['level' => 1, "limit" => 0],
+                'edit_caption_put' => ['level' => 1, "limit" => 0],
+                'most_get' => ['level' => 1, "limit" => 0],
+                'user_get' => ['level' => 1, "limit" => 0],
+                'report_post' => ['level' => 1, "limit" => 0],
+                'upvote_reply_post' => ['level' => 1, "limit" => 0],
+                'downvote_reply_post' => ['level' => 1, "limit" => 0],
+                'upvote_comment_post' => ['level' => 1, "limit" => 0],
+                'downvote_comment_post' => ['level' => 1, "limit" => 0],
+                'upvote_post' => ['level' => 1, "limit" => 0],
+                'downvote_post' => ['level' => 1, "limit" => 0],
+                'comment_post' => ['level' => 1, "limit" => 0],
+                'reply_post' => ['level' => 1, "limit" => 0],
+                'upload_post' => ['level' => 1, "limit" => 0],
+                'delete_delete' => ['level' => 1, "limit" => 0],
+                'memegen_templates_get' => ['level' => 1, "limit" => 0],
+                'memegen_fonts_get' => ['level' => 1, "limit" => 0],
+                'memegen_create_meme_get' => ['level' => 1, "limit" => 0]
+            ];
+        }else{
+            $this->methods = [
+                'all_get' => ['level' => 1, 'limit' => $limits],
+                'trending_get' => ['level' => 1, "limit" => $limits],
+                'hot_get' => ['level' => 1, "limit" => $limits],
+                'fresh_get' => ['level' => 1, "limit" => $limits],
+                'explore_get' => ['level' => 1, "limit" => $limits],
+                'get_get' => ['level' => 1, "limit" => $limits],
+                'edit_caption_put' => ['level' => 1, "limit" => $limits],
+                'most_get' => ['level' => 1, "limit" => $limits],
+                'user_get' => ['level' => 1, "limit" => $limits],
+                'report_post' => ['level' => 1, "limit" => $limits],
+                'upvote_reply_post' => ['level' => 1, "limit" => $limits],
+                'downvote_reply_post' => ['level' => 1, "limit" => $limits],
+                'upvote_comment_post' => ['level' => 1, "limit" => $limits],
+                'downvote_comment_post' => ['level' => 1, "limit" => $limits],
+                'upvote_post' => ['level' => 1, "limit" => $limits],
+                'downvote_post' => ['level' => 1, "limit" => $limits],
+                'comment_post' => ['level' => 1, "limit" => $limits],
+                'reply_post' => ['level' => 1, "limit" => $limits],
+                'upload_post' => ['level' => 1, "limit" => $limits],
+                'delete_delete' => ['level' => 1, "limit" => $limits],
+                'memegen_templates_get' => ['level' => 1, "limit" => $limits],
+                'memegen_fonts_get' => ['level' => 1, "limit" => $limits],
+                'memegen_create_meme_get' => ['level' => 1, "limit" => $limits]
+            ];
+        }
+
         // Configure limits on our controller methods
         // Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
-        $this->methods['users_get']['limit'] = 500; // 500 requests per hour per user/key
-        $this->methods['all_get']['level'] = 1; // 500 requests per hour per user/key
-        $this->methods['all_get']['limit'] = 1; // 500 requests per hour per user/key
-        $this->methods['users_post']['limit'] = 100; // 100 requests per hour per user/key
-        $this->methods['users_delete']['limit'] = 50; // 50 requests per hour per user/key
+        // $this->methods['users_get']['limit'] = 500; // 500 requests per hour per user/key
+        // $this->methods['all_get']['level'] = 1; // 500 requests per hour per user/key
+        // $this->methods['all_get']['limit'] = 3; // 500 requests per hour per user/key
+        // $this->methods['users_post']['limit'] = 100; // 100 requests per hour per user/key
+        // $this->methods['users_delete']['limit'] = 50; // 50 requests per hour per user/key
     }
 
     public function all_get()

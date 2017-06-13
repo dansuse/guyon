@@ -24,7 +24,7 @@ class Key extends REST_Controller {
             'index_delete' => ['level' => 10],
             'level_post' => ['level' => 10],
             'regenerate_post' => ['level' => 10],
-            'new_get' => ['level' => 10, "key" => FALSE]
+            'new_post' => ['level' => 10, "key" => FALSE]
         ];
 
     /**
@@ -34,8 +34,10 @@ class Key extends REST_Controller {
      * @return void
      */
 
-    public function new_get(){
-        $username = $this->get('username');
+    public function new_post(){
+        $username = $this->post('username');
+        $client_id = $this->post('client_id');
+        $limits = $this->post('limits');
         $this->load->model("User_model", "User");
 
         if(is_null($username) || empty($username)){
@@ -49,24 +51,44 @@ class Key extends REST_Controller {
                 'message' => 'Username is empty quoted string'
             ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // 
         }
-        $valid = $this->User->checkUsernameValid($username);
-        if($valid == false){
+
+        if(is_null($client_id) || empty($client_id)){
             $this->response([
                 'status' => FALSE,
-                'message' => 'Username is not valid'
-            ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // 
-        }else if($valid != "make new key"){
-            $this->response([
-                'status' => FALSE,
-                'message' => 'You have already request for api key',
-                'api_key' => $valid
+                'message' => 'Include Client ID in your request'
             ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // 
         }
 
+        if(is_null($limits)){
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Include limits in your request'
+            ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // 
+        }
+
+        //koding ini tidak diperlukan lagi karena sekarang untuk dapat api key
+        //ada halaman pendaftaran dimana untuk mengakses halaman tersebut,
+        //pengguna harus login
+        //jadi dapat dipastikan data-data yang diberikan valid
+        // $valid = $this->User->checkUsernameValid($username);
+        // if($valid == false){
+        //     $this->response([
+        //         'status' => FALSE,
+        //         'message' => 'Username is not valid'
+        //     ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // 
+        // }else if($valid != "make new key"){
+        //     $this->response([
+        //         'status' => FALSE,
+        //         'message' => 'You have already request for api key',
+        //         'api_key' => $valid
+        //     ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // 
+        // }
+
         $key = $this->_generate_key();
         $level = $this->put('level') ? $this->put('level') : 1;
-        $ignore_limits = ctype_digit($this->put('ignore_limits')) ? (int) $this->put('ignore_limits') : 1;
-        if ($this->_insert_key($key, ['level' => $level, 'ignore_limits' => $ignore_limits, 'username' => $username]))
+        //$ignore_limits = ctype_digit($this->put('ignore_limits')) ? (int) $this->put('ignore_limits') : 1;
+        $ignore_limits = 0;
+        if ($this->_insert_key($key, ['level' => $level, 'ignore_limits' => $ignore_limits, 'username' => $username, 'client_id' => $client_id, 'limits' => $limits]))
         {
             $this->response([
                 'status' => TRUE,

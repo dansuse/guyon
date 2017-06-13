@@ -111,7 +111,7 @@ $config['rest_realm'] = 'REST API';
 |
 */
 
-//$config['rest_auth'] = 'oauth2';
+// $config['rest_auth'] = 'oauth2';
 $config['rest_auth'] = 'FALSE';
 
 
@@ -330,7 +330,7 @@ $config['rest_keys_table'] = 'keys';
 |   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 |
 */
-$config['rest_enable_keys'] = FALSE;
+$config['rest_enable_keys'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

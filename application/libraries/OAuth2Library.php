@@ -73,6 +73,6 @@ class OAuth2Library {
 		    $this->server->getResponse()->send();
 		    die;
 		}
-		echo json_encode(array('success' => true, 'message' => 'You accessed my APIs!'));
+		//echo json_encode(array('success' => true, 'message' => 'You accessed my APIs!'));
     }
 }

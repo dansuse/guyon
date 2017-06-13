@@ -13,7 +13,18 @@ class Client_model extends CI_Model {
     }
 
     public function loadAll($username){
-        return $this->db->select('client_id, client_secret, redirect_uri, nama_aplikasi, deskripsi_aplikasi')->where('user_id', $username)->get("oauth_clients")->result();
+        return $this->db->select('oauth_clients.client_id, oauth_clients.client_secret, oauth_clients.redirect_uri, oauth_clients.nama_aplikasi, oauth_clients.deskripsi_aplikasi, keys.limits, keys.key')->from('oauth_clients')
+            ->join('keys', 'oauth_clients.client_id = keys.client_id')
+            ->where('oauth_clients.user_id', $username)
+            ->get()->result();
+    }
+
+    public function insertApiKey($dataApiKey){
+        $this->db->insert("keys", $dataApiKey);
+    }
+
+    public function cekApiKeyKembar($apikey){
+        return $this->db->where('key', $apikey)->count_all_results('keys');
     }
 
     public function login($new){

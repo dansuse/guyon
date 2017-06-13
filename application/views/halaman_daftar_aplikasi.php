@@ -53,6 +53,13 @@
                 <textarea class="form-control" name="deskripsi_aplikasi" placeholder="Deskripsi Aplikasi" required=""></textarea>
             </div>
 
+            <div class="radio">
+                <label><input type="radio" name="limits" value="1000">Paket Rp.100.000,00 untuk 1000 kali akses</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="limits" value="3000">Paket Rp.200.000,00 untuk 3000 kali akses</label>
+            </div>
+
             <input name="submit" class="btn btn-primary form-control" type="submit" value="Buat"></input>
         </form>
         <p>
@@ -73,10 +80,10 @@
     <div class="col-md-9">
         <?php
             
-            $this->table->set_heading('Nama Aplikasi', 'Deskripsi Aplikasi', 'Client ID', 'Client Secret', 'Redirect URL');
+            $this->table->set_heading('Nama Aplikasi', 'Deskripsi Aplikasi', 'Client ID', 'Client Secret', 'Redirect URL', 'API KEY', 'Limits');
 
             for ($i = 0 ; $i < count($data) ; $i++) {
-                $this->table->add_row($data[$i]->nama_aplikasi, '<p class="cell">'.$data[$i]->deskripsi_aplikasi. "</p>", '<p class="cell">'.$data[$i]->client_id."</p>", '<p class="cell">'.$data[$i]->client_secret."</p>", $data[$i]->redirect_uri);
+                $this->table->add_row($data[$i]->nama_aplikasi, '<p class="cell">'.$data[$i]->deskripsi_aplikasi. "</p>", '<p class="cell">'.$data[$i]->client_id."</p>", '<p class="cell">'.$data[$i]->client_secret."</p>", $data[$i]->redirect_uri, $data[$i]->key, $data[$i]->limits);
             }
             echo $this->table->generate();
         ?>

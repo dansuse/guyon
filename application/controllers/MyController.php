@@ -14,6 +14,30 @@ class MyController extends CI_Controller {
         $this->load->model('Client_model', 'client');
     }
 
+    private function _generate_key()
+    {
+        do
+        {
+            // Generate a random salt
+            $salt = base_convert(bin2hex($this->security->get_random_bytes(64)), 16, 36);
+
+            // If an error occurred, then fall back to the previous method
+            if ($salt === FALSE)
+            {
+                $salt = hash('sha256', time() . mt_rand());
+            }
+
+            $new_key = substr($salt, 0, 40);
+        }
+        while ($this->_key_exists($new_key));
+
+        return $new_key;
+    }
+    private function _key_exists($key)
+    {
+        return $this->client->cekApiKeyKembar($key) > 0;
+    }
+
     public function index()
     {
 		//$this->load->helper('url');
@@ -129,6 +153,18 @@ class MyController extends CI_Controller {
         $new['deskripsi_aplikasi'] = $this->input->post('deskripsi_aplikasi');
         
         $this->client->registerApp($new);
+
+        $dataApiKey["username"] = $this->session->userdata(SESSION_LOGIN_NOW)['username'];
+        //echo $this->client->cekApiKeyKembar('asdasd') > 0 == false ? 'haha':'hihi';
+        $dataApiKey["key"] = $this->_generate_key();
+        // echo $dataApiKey["key"];
+        $dataApiKey["level"] = 1;
+        $dataApiKey["ignore_limits"] = 0;
+        $dataApiKey["is_private_key"] = 0;
+        $dataApiKey["client_id"] = $new['client_id'];
+        $dataApiKey["limits"] = $this->input->post('limits');
+        $this->client->insertApiKey($dataApiKey);
+
         redirect('MyController/daftaraplikasi');
     }
 
