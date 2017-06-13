@@ -111,7 +111,8 @@ $config['rest_realm'] = 'REST API';
 |
 */
 
-$config['rest_auth'] = 'oauth2';
+//$config['rest_auth'] = 'oauth2';
+$config['rest_auth'] = 'FALSE';
 
 
 /*
