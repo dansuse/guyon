@@ -94,6 +94,11 @@ class Post extends REST_Controller {
     {
         $data['start'] = $this->get("start");
         $data['end'] = $this->get("end");
+        if($this->get("user")){
+            $data['user'] = $this->get("user");
+        }else{
+            $data['user'] = "";
+        }
 
         
         $res = $this->Post_model->get($data);
@@ -114,6 +119,11 @@ class Post extends REST_Controller {
     {
         $data['start'] = $this->get("start");
         $data['end'] = $this->get("end");
+        if($this->get("user")){
+            $data['user'] = $this->get("user");
+        }else{
+            $data['user'] = "";
+        }
 
         
         $res = $this->Post_model->get_trending($data);
@@ -134,7 +144,11 @@ class Post extends REST_Controller {
     {
         $data['start'] = $this->get("start");
         $data['end'] = $this->get("end");
-
+        if($this->get("user")){
+            $data['user'] = $this->get("user");
+        }else{
+            $data['user'] = "";
+        }
         
         $res = $this->Post_model->get_hot($data);
         if (!empty($res))
@@ -145,7 +159,7 @@ class Post extends REST_Controller {
         {
             $this->set_response([
                 'status' => FALSE,
-                'message' => 'User could not be found'
+                'message' => 'Data not found'
             ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
         }
     }
@@ -154,6 +168,11 @@ class Post extends REST_Controller {
     {
         $data['start'] = $this->get("start");
         $data['end'] = $this->get("end");
+        if($this->get("user")){
+            $data['user'] = $this->get("user");
+        }else{
+            $data['user'] = "";
+        }
 
         
         $res = $this->Post_model->get_fresh($data);
@@ -172,8 +191,25 @@ class Post extends REST_Controller {
 
     public function explore_get()
     {
-        $data['kategori'] = $this->get("kategori");
-        $data['start'] = $this->get("start");
+        $res = $this->Post_model->explore();
+        if (!empty($res))
+        {
+            $this->set_response($res, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+        }
+        else
+        {
+            $this->set_response([
+                'status' => FALSE,
+                'message' => 'Data not found'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+    }
+
+    public function kategori_get()
+    {
+        $data['kategori'] = $this->get("id");
+        $data['user'] = $this->get("user");
+        $data['start'] = $this->get("start");   
         $data['end'] = $this->get("end");
 
         
@@ -219,20 +255,11 @@ class Post extends REST_Controller {
         }
     }
 
-    public function edit_caption_put(){
-        
-        $id = $this->put("id");
-        $newCaption = $this->put("newCaption");
+    public function edit_caption_post(){
+        $id = $this->post("id");
+        $newCaption = $this->post("caption");
         $data = $this->Post_model->edit_caption_post($id, $newCaption);
         $this->response($data, REST_Controller::HTTP_OK);
-        if ($data["status"])
-        {
-            $this->response($data, REST_Controller::HTTP_OK);
-        }
-        else
-        {
-            $this->response($data, REST_Controller::HTTP_NOT_MODIFIED);
-        }
     }
 
     public function most_get()
@@ -255,33 +282,27 @@ class Post extends REST_Controller {
 
     public function user_get()
     {
-        $data['id'] = $this->get("id");
+        $data['user'] = $this->get("username");
         $data['start'] = $this->get("start");
         $data['end'] = $this->get("end");
         
         $data = $this->Post_model->get_from_user($data);
-        if($id === NULL){
+        if ($data)
+        {
+            $this->response($data, REST_Controller::HTTP_OK);
+        }
+        else
+        {
             $this->response([
-                    'status' => FALSE,
-                    'message' => 'No parameter found'
+                'status' => FALSE,
+                'message' => 'No post were found'
             ], REST_Controller::HTTP_NOT_FOUND);
         }
-        if ($data)
-            {
-                $this->response($data, REST_Controller::HTTP_OK);
-            }
-            else
-            {
-                $this->response([
-                    'status' => FALSE,
-                    'message' => 'No post were found'
-                ], REST_Controller::HTTP_NOT_FOUND);
-            }
     }
 
     public function random_get()
     {
-        
+        $data['user'] = $this->get("user");
         $data = $this->Post_model->random();
 
         if ($data)
@@ -301,7 +322,7 @@ class Post extends REST_Controller {
     {
         $id = $this->post("id");
         $username = $this->post("username");
-        $cause = $this->post("cause");
+        $cause = $this->post("report");
         
         $data = $this->Post_model->report_post($id, $username,$cause);
 
@@ -435,6 +456,25 @@ class Post extends REST_Controller {
         }
     }
 
+    public function comment_get(){
+        $id = $this->get("id");
+        $user = ($this->get("username")) ? $this->get("username") : "";
+        
+        $data = $this->Post_model->get_comment($id, $user);
+
+        if ($data)
+            {
+                $this->response($data, REST_Controller::HTTP_OK);
+            }
+            else
+            {
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'Failed'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
     public function comment_post()
     {
         $id = $this->post("id");
@@ -481,7 +521,7 @@ class Post extends REST_Controller {
     public function upload_post(){
         $data = [
             "username" => $this->post('username'),
-            "idkategori" => $this->post("category"),
+            "idkategori" => $this->post("idkategori"),
             "caption" => $this->post("caption"),
             'namafile' => $_FILES['userfile']['name']
         ];
@@ -501,21 +541,14 @@ class Post extends REST_Controller {
          }
     }
 
-    public function delete_delete()
+    public function delete_post()
     {
-        $id = $this->delete('id');
-        $postid = $this->delete('postid');
-
-        if ($id == NULL || $postid == NULL)
-        {
-            $this->response(array("status"=>"failed","description"=>"Invalid parameter."), REST_Controller::HTTP_BAD_REQUEST);
-        }
+        $id = $this->post('username');
+        $postid = $this->post('id');
 
         $this->load->model("Post_model", "Post");
-        $message = [
-            "status" => $this->Post_model->delete($id, $postid)
-        ];
-        $this->set_response($message, REST_Controller::HTTP_NO_CONTENT); // NO_CONTENT (204) being the HTTP response code
+        $message = $this->Post_model->delete($id, $postid);
+        $this->set_response($message, REST_Controller::HTTP_OK); // NO_CONTENT (204) being the HTTP response code
     }
 
     public function memegen_templates_get(){

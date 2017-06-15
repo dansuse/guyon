@@ -42,11 +42,13 @@ class User extends REST_Controller {
         ];
         $this->load->model("User_model", "User");
         if($this->User->register($message)){
-            $message['message'] = "Register Success!";
-            $this->set_response($message, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
+            $messages['status'] = TRUE;
+            $messages['message'] = "Register Success!";
+            $this->set_response($messages, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
         }else{
-            $message['message'] = "Register Failed!";
-            $this->set_response($message, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
+            $messages['status'] = FALSE;
+            $messages['message'] = "Register Failed!";
+            $this->set_response($messages, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
         }
     }
 
@@ -58,13 +60,7 @@ class User extends REST_Controller {
             'password' => $this->post('pass')
         ];
         $this->load->model("User_model", "User");
-        if($this->User->login($message)){
-            $message['message'] = "Login Success!";
-            $this->set_response($message, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
-        }else{
-            $message['message'] = "Login Failed!";
-            $this->set_response($message, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
-        }
+        $this->set_response($this->User->login($message), REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
     }   
 
     public function users_delete()

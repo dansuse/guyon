@@ -35,59 +35,122 @@ class Post_model extends CI_Model {
         }
         return [
             'status' => FALSE,
-            'message' => 'Edit caption failed'
+            'message' => $id
         ];
     }    
 
     public function get($data){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
-        $data = $this->db->where("status",1)->get("post", $data['end'] - $data['start'], $data['start'])->result();
-        foreach ($data as $d) {
+        $datas = $this->db->where("status",1)->get("post", $data['end'] - $data['start'], $data['start'])->result();
+        foreach ($datas as $d) {
+            if($data['user'] != ""){
+                $res = $this->db->where(array("idpost"=>$d->id, "username"=>$data['user']))->get("like")->row();
+                if($res != null){
+                    $d->like = (int)$res->status;
+                }else{
+                    $d->like = 0; 
+                }
+            }else{
+                $d->like = 0;
+            }
             $d->id = $this->Safe->encrypt($d->id, $salt);
             $d->namafile = base_url() . "uploads/post/" . $d->namafile;
         }
-        return $data;
+        return $datas;
     }
 
     public function get_trending($data){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
-        $data = $this->db->where("status",1)->order_by("like_count","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
-        foreach ($data as $d) {
+        $datas = $this->db->where("status",1)->order_by("like_count","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
+        foreach ($datas as $d) {
+            if($data['user'] != ""){
+                $res = $this->db->where(array("idpost"=>$d->id, "username"=>$data['user']))->get("like")->row();
+                if($res != null){
+                    $d->like = (int)$res->status;
+                }else{
+                    $d->like = 0; 
+                }
+            }else{
+                $d->like = 0;
+            }
             $d->id = $this->Safe->encrypt($d->id, $salt);
             $d->namafile = base_url() . "uploads/post/" . $d->namafile;
         }
-        return $data;
+        return $datas;
     }
 
     public function get_hot($data){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
-        $data = $this->db->where("status",1)->order_by("hit_count","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
-        foreach ($data as $d) {
+        $datas = $this->db->where("status","1")->order_by("comment_count","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
+        foreach ($datas as $d) {
+            if($data['user'] != ""){
+                $res = $this->db->where(array("idpost"=>$d->id, "username"=>$data['user']))->get("like")->row();
+                if($res != null){
+                    $d->like = (int)$res->status;
+                }else{
+                    $d->like = 0; 
+                }
+            }else{
+                $d->like = 0;
+            }
             $d->id = $this->Safe->encrypt($d->id, $salt);
             $d->namafile = base_url() . "uploads/post/" . $d->namafile;
         }
-        return $data;
+        return $datas;
     }
 
     public function get_fresh($data){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
-        $data = $this->db->where("status",1)->order_by("updated","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
-        foreach ($data as $d) {
+        $datas = $this->db->where("status",1)->order_by("updated","desc")->get("post", $data['end'] - $data['start'], $data['start'])->result();
+        foreach ($datas as $d) {
+            if($data['user'] != ""){
+                $res = $this->db->where(array("idpost"=>$d->id, "username"=>$data['user']))->get("like")->row();
+                if($res != null){
+                    $d->like = $res->status;
+                }else{
+                    $d->like = 0; 
+                }
+            }else{
+                $d->like = 0;
+            }
             $d->id = $this->Safe->encrypt($d->id, $salt);
             $d->namafile = base_url() . "uploads/post/" . $d->namafile;
         }
-        return $data;
+        return $datas;
+    }
+
+    public function explore(){
+        $salt = 'qJB0rGtIn5UB1xG03efyCp';
+        $datas = $this->db->get("category")->result();
+        foreach ($datas as $d) {
+            $res = $this->db->where(array("status"=>"1","idkategori"=>$d->id))->select("namafile")->get("post",0,5)->result();
+            foreach($res as $r){
+                $r->namafile = base_url() . "uploads/post/" . $r->namafile;
+            }
+            $d->images = $res;
+        }
+        return $datas;
     }
 
     public function get_by_kategori($data){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
         $arr = ["status"=>"1","idkategori"=>$data['kategori']];
-        $data = $this->db->where($arr)->get("post",$data['end'] - $data['start'], $data['start'])->result();
-        foreach ($data as $d) {
+        $datas = $this->db->where($arr)->get("post",$data['end'] - $data['start'], $data['start'])->result();
+        foreach ($datas as $d) {
+            if($data['user'] != ""){
+                $res = $this->db->where(array("idpost"=>$d->id, "username"=>$data['user']))->get("like")->row();
+                if($res != null){
+                    $d->like = $res->status;
+                }else{
+                    $d->like = 0; 
+                }
+            }else{
+                $d->like = 0;
+            }
             $d->id = $this->Safe->encrypt($d->id, $salt);
             $d->namafile = base_url() . "uploads/post/" . $d->namafile;
         }
-        return $data;
+        return $datas;
     }
 
     public function most_post(){
@@ -99,33 +162,52 @@ class Post_model extends CI_Model {
 
     public function get_from_user($data){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
-        $data = $this->db->where("username",$data['id'])->get("post",$data['end'] - $data['start'], $data['start'])->result();
-        foreach ($data as $d) {
+        $datas = $this->db->where(array("username"=>$data['user'],"status"=>"1"))->order_by("created", "DESC")->get("post",$data['end'] - $data['start'], $data['start'])->result();
+        foreach ($datas as $d) {
+            if($data['user'] != ""){
+                $res = $this->db->where(array("idpost"=>$d->id, "username"=>$data['user']))->get("like")->row();
+                if($res != null){
+                    $d->like = $res->status;
+                }else{
+                    $d->like = 0; 
+                }
+            }else{
+                $d->like = 0;
+            }
             $d->id = $this->Safe->encrypt($d->id, $salt);
+            $d->namafile = base_url() . "uploads/post/" . $d->namafile;
         }
-        return $data;
+        return $datas;
     } 
 
-    public function random(){
+    public function random($data){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
-        $data = $this->db->order_by('rand()')->limit(1)->get("post")->row();
+        $data = $this->db->where("status","1")->order_by('rand()')->limit(1)->get("post")->row();
+        $data->like = $this->db->where(array("idpost"=>$data->id, "username"=>$data['user']))->get("like")->row();
         $data->id = $this->Safe->encrypt($data->id, $salt);
+        $data->namafile = base_url() . "uploads/post/" . $data->namafile;
         return $data;
     }
 
     public function delete($id, $postid){
         $salt = 'qJB0rGtIn5UB1xG03efyCp';
-        $newId = $this->Safe->decrypt($postid, $salt);
         $where = [
             "username" => $id,
             "id" => $postid
         ];
         $data = $this->db->where($where)->get("post")->row();
         if($data){
-            $this->db->delete("post", $where);
-            return "success";
+            $this->db->where("id",$postid);
+            $this->db->update("post", array("status"=>"0"));
+            return [
+                'status' => TRUE,
+                'message' => "Delete Post success"
+            ];
         }
-        return "fail";
+        return [
+            'status' => FALSE,
+            'message' => $id
+        ];
     }
 
     //_post tidak berarti menggunakan method post REST API
@@ -248,8 +330,27 @@ class Post_model extends CI_Model {
         }
         return [
             'status' => FALSE,
-            'message' => 'Invalid ID'
+            'message' => $id
         ];;
+    }
+
+    public function get_comment($id, $username){
+        $salt = 'qJB0rGtIn5UB1xG03efyCp';
+        $newId = $this->Safe->decrypt($id, $salt);
+        $datas = $this->db->where("idpost",$newId)->get("comment")->result();
+        foreach ($datas as $d) {
+            if($username != ""){
+                $res = $this->db->where(array("idcomment"=>$d->id, "username"=>$username))->get("comment_like")->row();
+                if($res != null){
+                    $d->like = $res->status;
+                }else{
+                    $d->like = 0; 
+                }
+            }else{
+                $d->like = 0;
+            }
+        }
+        return $datas;
     }
 
     public function comment($id, $comment, $username){

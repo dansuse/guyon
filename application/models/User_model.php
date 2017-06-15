@@ -12,7 +12,8 @@ class User_model extends CI_Model {
         $data = $this->db->where("username", $new['username'])->get("user")->row();
         if(empty($data)){
             $new['hash'] = $this->Safe->get_hash();
-            $new['password'] = $this->Safe->encrypt($new['password'], $new['hash']);
+            //$new['password'] = $this->Safe->encrypt($new['password'], $new['hash']);
+            $new['password'] = md5($new['password']);
             $this->db->insert("user", $new);
             return true;
         }else{
@@ -23,15 +24,23 @@ class User_model extends CI_Model {
     public function login($new){
         $data = $this->db->where("username", $new['username'])->get("user")->row();
         if(empty($data)){
-            return false;
+            return [
+                'message' => "Wrong password or username",
+                'status' => false
+            ];
         }else{
-            $hash = $data->hash;
-            $loginPass = $new['password'];
-            $pass = $this->Safe->decrypt($data->password, $hash);
+            $loginPass = md5($new['password']);
+            $pass = $data->password;
             if($loginPass == $pass){
-                return true;
+                return [
+                    'message' => "Login success",
+                    'status' => true
+                ];
             }else{
-                return false;
+                return [
+                    'message' => "Wrong username or password",
+                    'status' => false
+                ];
             }
         }
     }
