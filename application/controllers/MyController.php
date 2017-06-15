@@ -76,7 +76,7 @@ class MyController extends CI_Controller {
 
     public function daftaraplikasi(){
         if($this->session->userdata(SESSION_LOGIN_NOW) !== null){
-            $data['data'] = $this->client->loadAll($this->session->userdata(SESSION_LOGIN_NOW)['username']);
+            $data['data'] = $this->client->loadAll($this->session->userdata(SESSION_LOGIN_NOW));
             $this->load->view('halaman_daftar_aplikasi', $data);
         }else{
             redirect("MyController/login");
@@ -189,7 +189,7 @@ class MyController extends CI_Controller {
 
             if($this->form_validation->run()){
                 $sess_data['username'] = $this->input->post('username');
-                $this->session->set_userdata(SESSION_LOGIN_NOW, $sess_data);
+                $this->session->set_userdata(SESSION_LOGIN_NOW, $sess_data['username']);
                 redirect('MyController/daftaraplikasi');
             }else{
                 $data['mode'] = "login";
@@ -214,7 +214,10 @@ class MyController extends CI_Controller {
     function cekLogin($email){
         $new["username"] = $email;
         $new["password"] = $this->input->post('password');
-        return $this->user->login($new);
+        $res = $this->user->login($new);
+        if($res['status']){
+            return $new["username"];
+        }
     }
     
 

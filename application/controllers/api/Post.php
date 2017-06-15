@@ -25,7 +25,8 @@ class Post extends REST_Controller {
         parent::__construct();
         $this->load->model("Post_model");
         $this->load->model("Key_model");
-
+        if(!isset($this->_apiuser))
+            return 0;
         $limits = $this->Key_model->checkLimit($this->_apiuser->key);
         if($limits == false){
             $this->methods = [
@@ -35,7 +36,7 @@ class Post extends REST_Controller {
                 'fresh_get' => ['level' => 1, "limit" => 0],
                 'explore_get' => ['level' => 1, "limit" => 0],
                 'get_get' => ['level' => 1, "limit" => 0],
-                'edit_caption_put' => ['level' => 1, "limit" => 0],
+                'edit_caption_post' => ['level' => 1, "limit" => 0],
                 'most_get' => ['level' => 1, "limit" => 0],
                 'user_get' => ['level' => 1, "limit" => 0],
                 'report_post' => ['level' => 1, "limit" => 0],
@@ -61,7 +62,7 @@ class Post extends REST_Controller {
                 'fresh_get' => ['level' => 1, "limit" => $limits],
                 'explore_get' => ['level' => 1, "limit" => $limits],
                 'get_get' => ['level' => 1, "limit" => $limits],
-                'edit_caption_put' => ['level' => 1, "limit" => $limits],
+                'edit_caption_post' => ['level' => 1, "limit" => $limits],
                 'most_get' => ['level' => 1, "limit" => $limits],
                 'user_get' => ['level' => 1, "limit" => $limits],
                 'report_post' => ['level' => 1, "limit" => $limits],
@@ -80,14 +81,6 @@ class Post extends REST_Controller {
                 'memegen_create_meme_get' => ['level' => 1, "limit" => $limits]
             ];
         }
-
-        // Configure limits on our controller methods
-        // Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
-        // $this->methods['users_get']['limit'] = 500; // 500 requests per hour per user/key
-        // $this->methods['all_get']['level'] = 1; // 500 requests per hour per user/key
-        // $this->methods['all_get']['limit'] = 3; // 500 requests per hour per user/key
-        // $this->methods['users_post']['limit'] = 100; // 100 requests per hour per user/key
-        // $this->methods['users_delete']['limit'] = 50; // 50 requests per hour per user/key
     }
 
     public function all_get()
