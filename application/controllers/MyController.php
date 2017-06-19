@@ -179,7 +179,7 @@ class MyController extends CI_Controller {
 
     public function logout(){
         $this->session->unset_userdata(SESSION_LOGIN_NOW, $sess_data);
-        redirect('MyController/login');
+        redirect('http://localhost/SOA/index.php/home');
     }
 
     public function handle_login(){

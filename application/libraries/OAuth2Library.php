@@ -62,7 +62,7 @@ class OAuth2Library {
 		if ($is_authorized) {
 		  // this is only here so that you get to see your code in the cURL request. Otherwise, we'd redirect back to the client
 		  $code = substr($response->getHttpHeader('Location'), strpos($response->getHttpHeader('Location'), 'code=')+5, 40);
-		  exit("SUCCESS! Authorization Code: $code");
+		  exit(json_encode(array('status'=>true,'code'=>"$code")));
 		}
 		$response->send();
     }
@@ -71,8 +71,8 @@ class OAuth2Library {
     	// Handle a request to a resource and authenticate the access token
 		if (!$this->server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
 		    $this->server->getResponse()->send();
+		    echo json_encode(array('status' => false, 'message' => 'NO ACCESS TOKEN'));
 		    die;
-		}
-		//echo json_encode(array('success' => true, 'message' => 'You accessed my APIs!'));
+		}		
     }
 }

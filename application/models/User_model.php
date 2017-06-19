@@ -38,7 +38,7 @@ class User_model extends CI_Model {
                 ];
             }else{
                 return [
-                    'message' => $loginPass,
+                    'message' => "Wrong password or username",
                     'status' => false
                 ];
             }
