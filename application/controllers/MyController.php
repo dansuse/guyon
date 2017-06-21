@@ -148,13 +148,13 @@ class MyController extends CI_Controller {
         $new['client_secret'] = $this->getToken(28);
         // echo $new['client_secret'];
         $new['redirect_uri'] = $this->input->post('redirect_url');
-        $new['user_id'] = $this->session->userdata(SESSION_LOGIN_NOW)['username'];
+        $new['user_id'] = $this->session->userdata(SESSION_LOGIN_NOW);
         $new['nama_aplikasi'] = $this->input->post('nama_aplikasi');
         $new['deskripsi_aplikasi'] = $this->input->post('deskripsi_aplikasi');
         
         $this->client->registerApp($new);
 
-        $dataApiKey["username"] = $this->session->userdata(SESSION_LOGIN_NOW)['username'];
+        $dataApiKey["username"] = $this->session->userdata(SESSION_LOGIN_NOW);
         //echo $this->client->cekApiKeyKembar('asdasd') > 0 == false ? 'haha':'hihi';
         $dataApiKey["key"] = $this->_generate_key();
         // echo $dataApiKey["key"];
