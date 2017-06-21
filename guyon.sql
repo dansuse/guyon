@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2017 at 02:33 PM
+-- Generation Time: Jun 21, 2017 at 10:28 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -145,13 +145,6 @@ CREATE TABLE `keys` (
   `limits` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `keys`
---
-
-INSERT INTO `keys` (`id`, `username`, `key`, `level`, `ignore_limits`, `is_private_key`, `ip_addresses`, `date_created`, `updated`, `client_id`, `limits`) VALUES
-(5, 'hendynew', 'kos8000ogk80k4wwc4g4kwwsswcksockskgs8444', 1, 0, 0, NULL, 0, '2017-06-13 10:43:19', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 1000);
-
 -- --------------------------------------------------------
 
 --
@@ -254,7 +247,8 @@ CREATE TABLE `limits` (
 --
 
 INSERT INTO `limits` (`id`, `uri`, `count`, `hour_started`, `api_key`) VALUES
-(1, 'api-key:kos8000ogk80k4wwc4g4kwwsswcksockskgs8444', 55, 1497578408, 'kos8000ogk80k4wwc4g4kwwsswcksockskgs8444');
+(1, 'api-key:kos8000ogk80k4wwc4g4kwwsswcksockskgs8444', 1, 1497888058, 'kos8000ogk80k4wwc4g4kwwsswcksockskgs8444'),
+(2, 'api-key:804wg0skooksc8g8kcsc04k0kokw0c00g0ogc0gg', 2, 1498011543, '804wg0skooksc8g8kcsc04k0kokw0c00g0ogc0gg');
 
 -- --------------------------------------------------------
 
@@ -2299,7 +2293,28 @@ INSERT INTO `logs` (`id`, `uri`, `method`, `params`, `api_key`, `ip_address`, `t
 (2000, 'api/post/user', 'get', 'a:9:{s:8:\"username\";s:8:\"hendynew\";s:5:\"start\";s:1:\"5\";s:3:\"end\";s:2:\"55\";s:4:\"user\";s:8:\"hendynew\";s:9:\"X-API-KEY\";s:40:\"kos8000ogk80k4wwc4g4kwwsswcksockskgs8444\";s:10:\"User-Agent\";s:61:\"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-E500H Build/LMY47X)\";s:4:\"Host\";s:14:\"192.168.43.189\";s:10:\"Connection\";s:10:\"Keep-Alive\";s:15:\"Accept-Encoding\";s:4:\"gzip\";}', 'kos8000ogk80k4wwc4g4kwwsswcksockskgs8444', '192.168.43.1', 1497579130, 0.251633, '1', 200),
 (2001, 'api/post/hot', 'get', 'a:8:{s:5:\"start\";s:1:\"0\";s:3:\"end\";s:2:\"05\";s:4:\"user\";s:8:\"hendynew\";s:9:\"X-API-KEY\";s:40:\"kos8000ogk80k4wwc4g4kwwsswcksockskgs8444\";s:10:\"User-Agent\";s:61:\"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-E500H Build/LMY47X)\";s:4:\"Host\";s:14:\"192.168.43.189\";s:10:\"Connection\";s:10:\"Keep-Alive\";s:15:\"Accept-Encoding\";s:4:\"gzip\";}', 'kos8000ogk80k4wwc4g4kwwsswcksockskgs8444', '192.168.43.1', 1497579133, 0.242845, '1', 200),
 (2002, 'api/post/trending', 'get', 'a:8:{s:5:\"start\";s:1:\"0\";s:3:\"end\";s:2:\"05\";s:4:\"user\";s:8:\"hendynew\";s:9:\"X-API-KEY\";s:40:\"kos8000ogk80k4wwc4g4kwwsswcksockskgs8444\";s:10:\"User-Agent\";s:61:\"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-E500H Build/LMY47X)\";s:4:\"Host\";s:14:\"192.168.43.189\";s:10:\"Connection\";s:10:\"Keep-Alive\";s:15:\"Accept-Encoding\";s:4:\"gzip\";}', 'kos8000ogk80k4wwc4g4kwwsswcksockskgs8444', '192.168.43.1', 1497579133, 0.219982, '1', 200),
-(2003, 'api/post/user', 'get', 'a:9:{s:8:\"username\";s:8:\"hendynew\";s:5:\"start\";s:1:\"0\";s:3:\"end\";s:2:\"05\";s:4:\"user\";s:8:\"hendynew\";s:9:\"X-API-KEY\";s:40:\"kos8000ogk80k4wwc4g4kwwsswcksockskgs8444\";s:10:\"User-Agent\";s:61:\"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-E500H Build/LMY47X)\";s:4:\"Host\";s:14:\"192.168.43.189\";s:10:\"Connection\";s:10:\"Keep-Alive\";s:15:\"Accept-Encoding\";s:4:\"gzip\";}', 'kos8000ogk80k4wwc4g4kwwsswcksockskgs8444', '192.168.43.1', 1497579134, 0.21117, '1', 200);
+(2003, 'api/post/user', 'get', 'a:9:{s:8:\"username\";s:8:\"hendynew\";s:5:\"start\";s:1:\"0\";s:3:\"end\";s:2:\"05\";s:4:\"user\";s:8:\"hendynew\";s:9:\"X-API-KEY\";s:40:\"kos8000ogk80k4wwc4g4kwwsswcksockskgs8444\";s:10:\"User-Agent\";s:61:\"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-E500H Build/LMY47X)\";s:4:\"Host\";s:14:\"192.168.43.189\";s:10:\"Connection\";s:10:\"Keep-Alive\";s:15:\"Accept-Encoding\";s:4:\"gzip\";}', 'kos8000ogk80k4wwc4g4kwwsswcksockskgs8444', '192.168.43.1', 1497579134, 0.21117, '1', 200),
+(2004, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"0a147ccf-8ca4-467e-9950-80204d5c407e\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497887829, 0.362746, '1', 0),
+(2005, 'api/post/report', 'post', 'a:8:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"af14308f-0a86-4a52-a6aa-8d77795da460\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:1:\"0\";s:10:\"Connection\";s:10:\"keep-alive\";}', '', '::1', 1497887978, 0.127844, '0', 403),
+(2006, 'api/post/report', 'post', 'a:9:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"8494f80f-f4b3-438f-a066-86b7ac0f5a66\";s:9:\"X-API-KEY\";s:40:\"4sscgcwow44sg80ogokg8ok0400w00wowwccw88w\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:1:\"0\";s:10:\"Connection\";s:10:\"keep-alive\";}', '', '::1', 1497888044, 0.169945, '0', 403),
+(2007, 'api/post/report', 'post', 'a:9:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"d5cdc4e6-db1b-48a9-a3f9-1e2c0a510f0e\";s:9:\"X-API-KEY\";s:40:\"kos8000ogk80k4wwc4g4kwwsswcksockskgs8444\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:1:\"0\";s:10:\"Connection\";s:10:\"keep-alive\";}', 'kos8000ogk80k4wwc4g4kwwsswcksockskgs8444', '::1', 1497888058, 0.15007, '1', 404),
+(2008, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"04f3f526-ec6a-450e-82d8-34194523082d\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497891393, 0.115426, '1', 0),
+(2009, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"61971a6f-7ff4-4d9c-b37d-723341862a4c\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497891404, 0.139542, '1', 0),
+(2010, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"a5c9f86c-8e6a-45cf-b6ed-bf7c2db9e4c0\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497891417, 0.162566, '1', 0),
+(2011, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"1667b8ae-ed30-473a-a855-a7c8411005a8\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497891430, 0.197383, '1', 0),
+(2012, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"113582d5-7055-4010-86fa-e11e78bb5dbb\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497891458, 0.152233, '1', 0),
+(2013, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"c0c59335-4e3f-4d8d-885b-264e107dee1c\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497892421, 0.158103, '1', 0),
+(2014, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"e03ba904-79f1-43a9-8f1d-2f7bfbe6a813\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1497892472, 0.137053, '1', 0),
+(2015, 'api/oauth2/token', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"487ac487-eae9-460a-9be8-466292c6b6b8\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:82:\"Basic YnVidXVlNXRKdVJnb01aWGRoZk5BMWhGenNDYTowTUdIOGJLbWFVWmtRSjNwQ3hKaHVVQWNpelNk\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"75\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"grant_type\";s:18:\"client_credentials\";s:4:\"code\";s:40:\"f99b89aa5a7a464979aa22c02731e329a5888eb4\";}', '', '::1', 1497892478, 0.133312, '1', 0),
+(2016, 'api/oauth2/token', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"725bef3f-8dca-4fd2-b405-267f2a908199\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:82:\"Basic YnVidXVlNXRKdVJnb01aWGRoZk5BMWhGenNDYTowTUdIOGJLbWFVWmtRSjNwQ3hKaHVVQWNpelNk\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"75\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"grant_type\";s:18:\"client_credentials\";s:4:\"code\";s:40:\"f99b89aa5a7a464979aa22c02731e329a5888eb4\";}', '', '::1', 1497892534, 0.166836, '1', 0),
+(2017, 'api/oauth2/token', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"70043389-5a17-42ea-856e-314fe11d5423\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:34:\"Basic dGVzdGNsaWVudDp0ZXN0cGFzcw==\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"79\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"grant_type\";s:13:\"refresh_token\";s:13:\"refresh_token\";s:40:\"6411e9ef2ea1e4036040713dadd2514052218291\";}', '', '::1', 1497893031, 0.0950191, '1', 0),
+(2018, 'api/oauth2/token', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"a5376503-004e-44d1-87f4-3feb0945cbe4\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:82:\"Basic YnVidXVlNXRKdVJnb01aWGRoZk5BMWhGenNDYTowTUdIOGJLbWFVWmtRSjNwQ3hKaHVVQWNpelNk\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"79\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"grant_type\";s:13:\"refresh_token\";s:13:\"refresh_token\";s:40:\"6411e9ef2ea1e4036040713dadd2514052218291\";}', '', '::1', 1497893056, 0.226746, '1', 0),
+(2019, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"9e64e447-8a66-47c8-a7d8-caa71dfa839e\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1498011467, 0.245036, '1', 0),
+(2020, 'api/oauth2/authorize', 'post', 'a:11:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"199663bc-b3bf-4966-b148-6a5821acf639\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:30:\"Basic aGVuZHluZXc6aGVuZHkxMjM=\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"14\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"authorized\";s:3:\"yes\";}', '', '::1', 1498011481, 0.216451, '1', 0),
+(2021, 'api/oauth2/token', 'post', 'a:12:{s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"3fb9bc9c-1f68-4751-939f-f12b3f4718eb\";s:12:\"Content-Type\";s:33:\"application/x-www-form-urlencoded\";s:13:\"Authorization\";s:82:\"Basic YnVidXVlNXRKdVJnb01aWGRoZk5BMWhGenNDYTowTUdIOGJLbWFVWmtRSjNwQ3hKaHVVQWNpelNk\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:14:\"content-length\";s:2:\"75\";s:10:\"Connection\";s:10:\"keep-alive\";s:10:\"grant_type\";s:18:\"client_credentials\";s:4:\"code\";s:40:\"b06b904ea424c1f11bacdca5f3b5bb38b7c01100\";}', '', '::1', 1498011503, 0.204795, '1', 0),
+(2022, 'api/post/all', 'get', 'a:9:{s:12:\"access_token\";s:40:\"3a9766b3904572571cf450d3e75a3b04ad0bb5d1\";s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"3cbe655c-3213-4e4e-93f0-12e0b39becf8\";s:9:\"X-API-KEY\";s:40:\"4sscgcwow44sg80ogokg8ok0400w00wowwccw88w\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:10:\"Connection\";s:10:\"keep-alive\";}', '', '::1', 1498011526, 0.146824, '0', 403),
+(2023, 'api/post/all', 'get', 'a:9:{s:12:\"access_token\";s:40:\"3a9766b3904572571cf450d3e75a3b04ad0bb5d1\";s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"cf410136-6241-4c61-b410-6ed78a162106\";s:9:\"X-API-KEY\";s:40:\"804wg0skooksc8g8kcsc04k0kokw0c00g0ogc0gg\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:10:\"Connection\";s:10:\"keep-alive\";}', '804wg0skooksc8g8kcsc04k0kokw0c00g0ogc0gg', '::1', 1498011543, 0.247551, '1', 200),
+(2024, 'api/post/all', 'get', 'a:9:{s:12:\"access_token\";s:40:\"3a9766b3904572571cf450d3e75a3b04ad0bb5d1\";s:13:\"cache-control\";s:8:\"no-cache\";s:13:\"Postman-Token\";s:36:\"5ead07ed-60bb-4788-af07-ae183020e480\";s:9:\"X-API-KEY\";s:40:\"804wg0skooksc8g8kcsc04k0kokw0c00g0ogc0gg\";s:10:\"User-Agent\";s:30:\"PostmanRuntime/3.0.11-hotfix.2\";s:6:\"Accept\";s:3:\"*/*\";s:4:\"Host\";s:9:\"localhost\";s:15:\"accept-encoding\";s:13:\"gzip, deflate\";s:10:\"Connection\";s:10:\"keep-alive\";}', '804wg0skooksc8g8kcsc04k0kokw0c00g0ogc0gg', '::1', 1498011588, 0.260746, '1', 200);
 
 -- --------------------------------------------------------
 
@@ -2322,7 +2337,11 @@ CREATE TABLE `oauth_access_tokens` (
 INSERT INTO `oauth_access_tokens` (`access_token`, `client_id`, `user_id`, `expires`, `scope`) VALUES
 ('0283685305e052c46863993b7062ab24cd1e9d96', 'asdasdQKz6FIuUoQ47Q5JGuBGf20', 'hendynew', '2017-06-13 10:13:27', NULL),
 ('2744ec5017cdf8525b3d4103ae7518407dd014e2', 'asdasdQKz6FIuUoQ47Q5JGuBGf20', 'hendynew', '2017-06-10 07:23:44', NULL),
-('b3198d9b6d8d14aa101e21ab7a0351bd609eb428', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', '2017-06-15 12:56:44', NULL);
+('b3198d9b6d8d14aa101e21ab7a0351bd609eb428', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', '2017-06-15 12:56:44', NULL),
+('abc31abf65d6609543400019d748b5090b9fe48f', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', '2017-06-19 18:14:38', NULL),
+('df321d69d58e29f4f935a41376fdc66df168325d', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', '2017-06-19 18:15:34', NULL),
+('e055fc12c64a60f00b43b2a5bdc15a7b664f2f86', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', '2017-06-19 18:24:16', NULL),
+('3a9766b3904572571cf450d3e75a3b04ad0bb5d1', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', '2017-06-21 03:18:23', NULL);
 
 -- --------------------------------------------------------
 
@@ -2352,7 +2371,14 @@ INSERT INTO `oauth_authorization_codes` (`authorization_code`, `client_id`, `use
 ('18ce9c097098ebc2e18d34e7e3164a0dcb6fe43f', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-15 11:26:21', NULL),
 ('0b763195cb0caba8fcbdd97f6ec52ed08a528890', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-15 11:27:04', NULL),
 ('b041cb14474c8675c62bda6a53335072b71594da', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-15 11:32:21', NULL),
-('61b879e4999961d37ef5e02dcea2273c39978d82', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-15 12:17:50', NULL);
+('61b879e4999961d37ef5e02dcea2273c39978d82', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-15 12:17:50', NULL),
+('8b85ea2186c5076ca39381e5d2715088c59eb72b', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-19 15:57:39', NULL),
+('3dd617d3c15bc6ace0e2f48aa81bb7c89f1d2539', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-19 16:57:14', NULL),
+('45c26502bf06ce7c24238b8638aed821a6f442de', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-19 16:57:40', NULL),
+('dfddb67c1364a41c80573f1ee03c90ddf82ac46b', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-19 16:58:08', NULL),
+('cb310d6868688fa62bbfd028c7ec31cb67456b7c', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-19 17:14:11', NULL),
+('f99b89aa5a7a464979aa22c02731e329a5888eb4', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', 'huhu', '2017-06-19 17:15:02', NULL),
+('b06b904ea424c1f11bacdca5f3b5bb38b7c01100', 'aplikasiF2UgKdxnURshaMVwnJTC', 'hendynew', 'http://stts.edu', '2017-06-21 02:18:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -2376,6 +2402,9 @@ CREATE TABLE `oauth_clients` (
 --
 
 INSERT INTO `oauth_clients` (`client_id`, `client_secret`, `redirect_uri`, `grant_types`, `scope`, `user_id`, `nama_aplikasi`, `deskripsi_aplikasi`) VALUES
+('aplikasiF2UgKdxnURshaMVwnJTC', 'wQHmRrV5mJQ8r8PfTtqKlpjv7nQH', 'http://stts.edu', NULL, NULL, 'hendynew', 'aplikasi', 'aplikasi guyon'),
+('aplikasiOEr0j9EMJVAj65S0V8wY', 'BMdNcJ7XMcBQyUaZjiKTQMyROitj', 'http://stts.edu', NULL, NULL, 'h', 'aplikasi', 'aplikasi'),
+('aplikasizRGhcMLkhyb0F2t38k9B', 'gE2AMWUONuyVbWyvTu3sDTpLLGGC', 'http://stts.edu', NULL, NULL, 'h', 'aplikasi', 'aplikasi guyon'),
 ('bubuue5tJuRgoMZXdhfNA1hFzsCa', '0MGH8bKmaUZkQJ3pCxJhuUAcizSd', 'huhu', NULL, NULL, 'hendynew', 'bubu', 'huhu');
 
 -- --------------------------------------------------------
@@ -2398,8 +2427,7 @@ CREATE TABLE `oauth_refresh_tokens` (
 
 INSERT INTO `oauth_refresh_tokens` (`refresh_token`, `client_id`, `user_id`, `expires`, `scope`) VALUES
 ('081aa4986dc14a5d15e74c2b59bb6adc85e4e61f', 'asdasdQKz6FIuUoQ47Q5JGuBGf20', 'hendynew', '2017-06-24 06:23:44', NULL),
-('136e9890ca6a4b0f7666434ceff82d05a42d4fa6', 'asdasdQKz6FIuUoQ47Q5JGuBGf20', 'hendynew', '2017-06-27 09:13:27', NULL),
-('6411e9ef2ea1e4036040713dadd2514052218291', 'bubuue5tJuRgoMZXdhfNA1hFzsCa', 'hendynew', '2017-06-29 11:56:44', NULL);
+('136e9890ca6a4b0f7666434ceff82d05a42d4fa6', 'asdasdQKz6FIuUoQ47Q5JGuBGf20', 'hendynew', '2017-06-27 09:13:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -2502,21 +2530,6 @@ CREATE TABLE `report` (
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `report`
---
-
-INSERT INTO `report` (`id`, `idpost`, `username`, `cause`, `status`, `created`, `updated`) VALUES
-(1, 8, 'hendynew', 'this is bad', 0, '2017-05-25 15:50:32', '2017-05-25 01:50:32'),
-(0, 8, 'angelo', 'test', 0, '0000-00-00 00:00:00', '2017-06-14 00:20:19'),
-(0, 21, 'hendynew', 'kurang bagus', 0, '0000-00-00 00:00:00', '2017-06-14 04:21:27'),
-(0, 21, 'hendynew', 'kurang bagus', 0, '0000-00-00 00:00:00', '2017-06-14 04:21:29'),
-(0, 21, 'hendynew', 'kurang bagus', 0, '0000-00-00 00:00:00', '2017-06-14 04:21:32'),
-(0, 21, 'hendynew', 'kurang bagus', 0, '0000-00-00 00:00:00', '2017-06-14 04:21:34'),
-(0, 21, 'hendynew', 'kurang bagus', 0, '0000-00-00 00:00:00', '2017-06-14 04:21:38'),
-(0, 41, 'hendynew', 'gk layak', 0, '0000-00-00 00:00:00', '2017-06-16 02:10:29'),
-(0, 41, 'hendynew', 'gk layak', 0, '0000-00-00 00:00:00', '2017-06-16 02:10:31');
-
 -- --------------------------------------------------------
 
 --
@@ -2579,6 +2592,12 @@ ALTER TABLE `comment_like`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `keys`
+--
+ALTER TABLE `keys`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `like`
 --
 ALTER TABLE `like`
@@ -2597,6 +2616,12 @@ ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `oauth_clients`
+--
+ALTER TABLE `oauth_clients`
+  ADD PRIMARY KEY (`client_id`);
+
+--
 -- Indexes for table `post`
 --
 ALTER TABLE `post`
@@ -2606,6 +2631,12 @@ ALTER TABLE `post`
 -- Indexes for table `reply_like`
 --
 ALTER TABLE `reply_like`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `report`
+--
+ALTER TABLE `report`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2639,6 +2670,11 @@ ALTER TABLE `comment`
 ALTER TABLE `comment_like`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
+-- AUTO_INCREMENT for table `keys`
+--
+ALTER TABLE `keys`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `like`
 --
 ALTER TABLE `like`
@@ -2647,12 +2683,12 @@ ALTER TABLE `like`
 -- AUTO_INCREMENT for table `limits`
 --
 ALTER TABLE `limits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2004;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2025;
 --
 -- AUTO_INCREMENT for table `post`
 --
@@ -2662,6 +2698,11 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT for table `reply_like`
 --
 ALTER TABLE `reply_like`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `report`
+--
+ALTER TABLE `report`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
