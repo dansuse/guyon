@@ -183,10 +183,9 @@ class MyController extends CI_Controller {
     }
 
     public function handle_login(){
-        if($this->input->post('submit') !== null ){
+        if($this->input->post('submit') !== null){
             $this->form_validation->set_rules('username', 'Username', 'callback_cekLogin');
             $this->form_validation->set_message('cekLogin', 'Login Gagal !');
-
             if($this->form_validation->run()){
                 $sess_data['username'] = $this->input->post('username');
                 $this->session->set_userdata(SESSION_LOGIN_NOW, $sess_data['username']);
@@ -212,12 +211,13 @@ class MyController extends CI_Controller {
     }
 
     function cekLogin($email){
+        if($email == "" || $this->input->post('password') == ""){
+            return false;
+        }
         $new["username"] = $email;
         $new["password"] = $this->input->post('password');
         $res = $this->user->login($new);
-        if($res['status']){
-            return $new["username"];
-        }
+        return $res['status'];
     }
     
 
